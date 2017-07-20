@@ -1,12 +1,62 @@
-class Cart extends Product{
+/**
+ * @class Cart
+ */
+class Cart extends Product {
     constructor(...props) {
-        super(...props)        
-        cartArr = []
+        super(...props)  
+        self = this
+        this.cartArr = [] 
+        
+        /**
+         * @function delFunktionForArr
+         * @param {Array} arr
+         */
+        function delFunktionForArr(arr){
+            for(let i in arr){
+                delete arr[i].filterForTyp
+                delete arr[i].visibleTyp
+                delete arr[i].sortForPrice
+                delete arr[i].addProduct
+            }
+        }
+
+         /**
+         * @function addProductCart
+         * @param {Array} product
+         * @param {String} model
+         */
+        this.addProductCart = function(product, model) {            
+             cart.addProduct(product , self.cartArr, model)
+             delFunktionForArr(self.cartArr)
+         }
+
+         /**
+         * @function checkProduct
+         * @return {Array} cartArr
+         */
+        this.checkProduct = function() {
+            console.table(self.cartArr)
+            return self.cartArr
+        }
+
+         /**
+         * @function cleanProduct
+         * @return {Array} cartArr
+         */
+        this.cleanProduct = function() {
+            self.cartArr.splice(0, self.cartArr.length)
+            return self.cartArr
+        }
     }
 }
 
-const prod1 = new Product("Lenovo", 1, "Lenovo S720", 500 , "Discr")
-const prod2 = new Product("Asus", 1, "Asus K520", 700 , "Text")
-const prod3 = new Product("Dell", 2, "Insp 7100", 1000 , "Monoblock")
- const arrVremProd = new Object.assign(prod1, prod2, prod3)
-// const cart = new Cart(addProductCart(arrVremProd, cartArr, 1))
+  const cart = new Cart()
+  
+  console.table(arrVremProd)
+  cart.addProductCart(arrVremProd, "Insp 7100")
+  cart.addProductCart(arrVremProd, "Asus K520")
+  cart.sortForPrice(self.cartArr)
+  cart.visibleTyp(arrVremProd)
+  const checkCart = cart.checkProduct()
+  //cart.cleanProduct()
+

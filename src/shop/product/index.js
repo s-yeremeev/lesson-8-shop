@@ -1,75 +1,114 @@
-class Product {
-    constructor(firma, typ, model, price, description ) {
-        this.firma = firma
-        this.typ = typ
-        this.model = model
-        this.price = price
-        this.description = description
+const Product = (function () {
+/**
+ * @class Product
+ * @param {Number} firma
+ * @param {Number} typ
+ * @param {String} model
+ * @param {Number} price
+ * @param {String} description
+ */
+    class Product {
+        constructor(firma, typ, model, price, description ) {
+            switch(firma) {
+                     case 1 : firma = "Lenovo"
+                         break
+                     case 2 : firma ="Asus"                       
+                         break
+                     case 3 : firma ="Dell"                      
+                         break
+                     case 4 : firma ="Acer"
+                         break
+                     case 5 : firma ="Aple"
+                         break
+                     return firma
+              }
 
-        this.getFirma = this.getFirma.bind(this)
-        this.geTyp = this.geTyp.bind(this)
-        this.getModel = this.getModel.bind(this)
-        this.getPrice = this.getPrice.bind(this)
-        this.getDescription = this.getDescription.bind(this)
+            this.firma = firma
 
-        this.filterForTyp = function(arr, typ) {
-             let typArr = []
-            for (let i in arr) {               
-                if(arr[i].typ == typ){
-                    typArr.push(arr[i])
+            switch(typ) {
+                     case 1 : typ = "Laptops"
+                         break
+                     case 2 : typ ="monoblocks"                       
+                         break
+                     case 3 : typ ="personal computers"                      
+                         break
+                     case 4 : typ ="Transformers"
+                         break
+              }
+            this.typ = typ
+            this.model = model
+            this.price = price
+            this.description = description
+
+            /**
+             * @function filterForTyp
+             * @param {Array} arr
+             * @param {Number} typ
+             */
+            this.filterForTyp = function(arr, typ) {
+                let typArr = []
+                for (let i in arr) {               
+                    if(arr[i].typ == typ){
+                        typArr.push(arr[i])
+                    }
                 }
+                console.table(typArr)
+                return typArr
             }
-            console.table(typArr)
-            return typArr
-        }
 
-        this.visibleTyp = function(arr) {
-            let visTyp = []
-            for(let i in arr) {
-                if(visTyp.find(arr.typ)) continue
-                else visTyp.push(arr.typ)
+             /**
+              *@function visibleTyp
+             * @param {Array} arr
+             */
+            this.visibleTyp = function(arr) {
+                let visTyp = []
+                for(let i in arr) {
+                    if (
+                        visTyp.find(
+                                    function (element, index, arr){
+                                        if(arr[i].typ) return true    
+                                            return false                                
+                                    })
+                    ) continue
+                    else visTyp.push(arr[i].typ)
+                     
+                }
+            console.table(visTyp)
+            return visTyp
             }
-        console.table(visTyp)
-        return visTyp
+
+             /**
+              *@function sortForPrice
+             * @param {Array} arr
+             */
+            this.sortForPrice = function (arr) {
+                arr.sort(
+                        function compare(a, b) {
+                                return a.price - b.price
+                        })
+                return arr
+            }
+
+              /**
+              *@function addProduct
+             * @param {Array} arrProd
+             * @param {Array} arr
+             * @param {String} model
+             */
+            this.addProduct = function (arrProd, arr, model) {
+                for(let i in arrProd) {
+                    if(arrProd[i].model !== model) continue
+                        else arr.push(arrProd[i])
+                }            
+            }        
+
         }
-
-        this.sortForPrice = function (arr) {
-            const sortArr = arr.sort(
-                function comparePrice(a, b) {
-                         return a.price < b.price;
-            })
-        }
-
-        this.addProductCart = function (arrProd, arrCart, model) {
-            for(let i in arrProd) {
-                if(arrProd[i].model !== model) continue
-                    else arrCart.push(arrProd[i])
-            }            
-        }        
-
     }
-        getFirma() {
-            return this.firma
-    }
-        geTyp() {
-            return this.typ
-    }
-        getModel() {
-            return this.model
-    }
-        getPrice() {
-            return this.price
-    }
-        getDescription() {
-            return this.description
-    } 
-} 
+    return Product
+})() 
 
-// const prod1 = new Product("Lenovo", 1, "Lenovo S720", 500 , "Discr")
-// const prod2 = new Product("Asus", 1, "Asus K520", 700 , "Text")
-// const prod3 = new Product("Dell", 2, "Insp 7100", 1000 , "Monoblock")
+ const prod1 = new Product(1, 1, "Lenovo S720", 800 , "Discr")
+ const prod2 = new Product(2, 2, "Asus K520", 700 , "Text")
+ const prod3 = new Product(3, 3, "Insp 7100", 900 , "Monoblock")
 
-// console.log(prod1)
-// console.log(prod2)
-// console.log(prod3)
-
+  const arrVremProd = [].concat(prod1, prod2, prod3)
