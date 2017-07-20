@@ -9,7 +9,29 @@ const Product = (function () {
  */
     class Product {
         constructor(firma, typ, model, price, description ) {
-            switch(firma) {
+           isFirma()
+           this.firma = firma
+           isTyp()
+           this.typ = typ
+           this.model = model
+           this.price = price
+           this.description = description
+
+           function isTyp() {
+                switch(typ) {
+                    case 1 : typ = "Laptops"
+                        break
+                    case 2 : typ = "monoblocks"                       
+                        break
+                    case 3 : typ = "personal computers"                      
+                        break
+                    case 4 : typ = "Transformers"
+                        break
+                }                   
+            }
+
+            function isFirma() {
+                switch(firma) {
                      case 1 : firma = "Lenovo"
                          break
                      case 2 : firma ="Asus"                       
@@ -18,27 +40,8 @@ const Product = (function () {
                          break
                      case 4 : firma ="Acer"
                          break
-                     case 5 : firma ="Aple"
-                         break
-                     return firma
-              }
-
-            this.firma = firma
-
-            switch(typ) {
-                     case 1 : typ = "Laptops"
-                         break
-                     case 2 : typ ="monoblocks"                       
-                         break
-                     case 3 : typ ="personal computers"                      
-                         break
-                     case 4 : typ ="Transformers"
-                         break
-              }
-            this.typ = typ
-            this.model = model
-            this.price = price
-            this.description = description
+                }
+            }
 
             /**
              * @function filterForTyp
@@ -47,6 +50,16 @@ const Product = (function () {
              */
             this.filterForTyp = function(arr, typ) {
                 let typArr = []
+                switch(typ) {
+                    case 1 : typ = "Laptops"
+                        break
+                    case 2 : typ = "monoblocks"                       
+                        break
+                    case 3 : typ = "personal computers"                      
+                        break
+                    case 4 : typ = "Transformers"
+                        break
+                }
                 for (let i in arr) {               
                     if(arr[i].typ == typ){
                         typArr.push(arr[i])
@@ -60,21 +73,8 @@ const Product = (function () {
               *@function visibleTyp
              * @param {Array} arr
              */
-            this.visibleTyp = function(arr) {
-                let visTyp = []
-                for(let i in arr) {
-                    if (
-                        visTyp.find(
-                                    function (element, index, arr){
-                                        if(arr[i].typ) return true    
-                                            return false                                
-                                    })
-                    ) continue
-                    else visTyp.push(arr[i].typ)
-                     
-                }
-            console.table(visTyp)
-            return visTyp
+            this.visibleTyp = function() {
+            console.log("You are available these types: value 1 = Laptops, value 2 = monoblocks, value 3 = personal computers, value 4 = Transformers")
             }
 
              /**
@@ -82,10 +82,9 @@ const Product = (function () {
              * @param {Array} arr
              */
             this.sortForPrice = function (arr) {
-                arr.sort(
-                        function compare(a, b) {
+                arr.sort(function compare(a, b) {
                                 return a.price - b.price
-                        })
+                })
                 return arr
             }
 
@@ -107,8 +106,9 @@ const Product = (function () {
     return Product
 })() 
 
- const prod1 = new Product(1, 1, "Lenovo S720", 800 , "Discr")
- const prod2 = new Product(2, 2, "Asus K520", 700 , "Text")
- const prod3 = new Product(3, 3, "Insp 7100", 900 , "Monoblock")
+ const prod1 = new Product(4, 4, "R 7500", 1000 , "Monoblock")
+ const prod2 = new Product(1, 1, "Lenovo S720", 800 , "Discr")
+ const prod3 = new Product(2, 2, "Asus K520", 700 , "Text")
+ const prod4 = new Product(3, 3, "Insp 7100", 900 , "Monoblock")
 
-  const arrVremProd = [].concat(prod1, prod2, prod3)
+ const arrVremProd = [].concat(prod1, prod2, prod3, prod4)

@@ -53,10 +53,11 @@ class Cart extends Product {
   const cart = new Cart()
   
   console.table(arrVremProd)
+  cart.visibleTyp()
+  cart.filterForTyp(arrVremProd, 2)
   cart.addProductCart(arrVremProd, "Insp 7100")
   cart.addProductCart(arrVremProd, "Asus K520")
   cart.sortForPrice(self.cartArr)
-  cart.visibleTyp(arrVremProd)
   const checkCart = cart.checkProduct()
   //cart.cleanProduct()
 

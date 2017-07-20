@@ -71,4 +71,3 @@ class Shop extends Cart {
  const klient = shop.klientDataForOrder("Namee", "((099) 999-99-99", "some@mail.com", "Kharkiv", "12345")
  const order = shop.order(klient, checkCart)
  console.table(order)
-
