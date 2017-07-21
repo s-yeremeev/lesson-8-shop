@@ -3,61 +3,51 @@
  */
 class Cart extends Product {
     constructor(...props) {
-        super(...props)  
-        self = this
-        this.cartArr = [] 
-        
-        /**
-         * @function delFunktionForArr
-         * @param {Array} arr
-         */
-        function delFunktionForArr(arr){
-            for(let i in arr){
-                delete arr[i].filterForTyp
-                delete arr[i].visibleTyp
-                delete arr[i].sortForPrice
-                delete arr[i].addProduct
-            }
-        }
+        super(...props)
 
-         /**
-         * @function addProductCart
-         * @param {Array} product
-         * @param {String} model
-         */
-        this.addProductCart = function(product, model) {            
-             cart.addProduct(product , self.cartArr, model)
-             delFunktionForArr(self.cartArr)
-         }
+        /**
+        * @function addProduct
+        * @param {Array} arrProd
+        * @param {Array} arr
+        * @param {String} model
+        */
+        this.addProduct = function (arrProd, arr, model) {
+            for(let i in arrProd) {
+                if(arrProd[i].model !== model) continue
+                    else arr.push(arrProd[i])
+            }            
+        }        
 
          /**
          * @function checkProduct
+         * @param {Array} arr
          * @return {Array} cartArr
          */
-        this.checkProduct = function() {
-            console.table(self.cartArr)
-            return self.cartArr
+        this.checkProduct = function(arr) {
+            console.table(cartArr)
+            return cartArr
         }
 
          /**
          * @function cleanProduct
+         * @param {Array} arr
          * @return {Array} cartArr
          */
-        this.cleanProduct = function() {
-            self.cartArr.splice(0, self.cartArr.length)
-            return self.cartArr
+        this.cleanProduct = function(arr) {
+            arr.splice(0, arr.length)
+            return arr
         }
     }
 }
 
   const cart = new Cart()
-  
+  const cartArr = []
   console.table(arrVremProd)
   cart.visibleTyp()
   cart.filterForTyp(arrVremProd, 2)
-  cart.addProductCart(arrVremProd, "Insp 7100")
-  cart.addProductCart(arrVremProd, "Asus K520")
-  cart.sortForPrice(self.cartArr)
-  const checkCart = cart.checkProduct()
-  //cart.cleanProduct()
+  cart.addProduct(arrVremProd, cartArr, "Insp 7100")
+  cart.addProduct(arrVremProd, cartArr, "Asus K520")
+  cart.sortForPrice(cartArr)
+  const checkCart = cart.checkProduct(cartArr)
+  //cart.cleanProduct(cartArr)
 
